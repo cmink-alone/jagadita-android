@@ -14,37 +14,15 @@
             android:layout_height="wrap_content"
             android:padding="32dp"
             android:orientation="vertical">
-            <ImageView
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_outline_filter_vintage_24"
-                android:layout_width="100dp"
-                android:tint="@color/colorPrimary"
-                android:layout_height="100dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="42dp"
-                android:layout_gravity="center"
-                android:text="Jagadita"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:textSize="42sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="Register"
-                android:textColor="@color/colorPrimary"
-                android:textSize="22sp" />
             <TextView
                 android:text="Nama"
+                android:textColor="#666"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/nama"
-
+                android:textColor="#666"
                 android:paddingBottom="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
@@ -52,11 +30,12 @@
             <TextView
                 android:text="Telp"
                 android:textSize="18sp"
+                android:textColor="#666"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/telp"
-
+                android:textColor="#666"
                 android:paddingBottom="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
@@ -64,11 +43,12 @@
             <TextView
                 android:text="Alamat"
                 android:textSize="18sp"
+                android:textColor="#666"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/alamat"
-
+                android:textColor="#666"
                 android:paddingBottom="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
@@ -76,35 +56,38 @@
             <TextView
                 android:text="Pekerjaan"
                 android:textSize="18sp"
+                android:textColor="#666"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/pekerjaan"
-
+                android:textColor="#666"
                 android:paddingBottom="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:text="Tanggal Lahir"
+                android:textColor="#666"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/tanggal_lahir"
-
+                android:textColor="#666"
                 android:paddingBottom="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:text="Jenis Kelamin"
+                android:textColor="#666"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/jenis_kelamin"
-
+                android:textColor="#666"
                 android:paddingBottom="16dp"
                 android:layout_marginBottom="32dp"
                 android:layout_width="match_parent"
@@ -112,13 +95,14 @@
 
             <TextView
                 android:text="Username"
+                android:textColor="#666"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/username"
                 android:textSize="18sp"
-
+                android:textColor="#666"
                 android:paddingBottom="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
@@ -126,6 +110,7 @@
 
             <TextView
                 android:text="Password"
+                android:textColor="#666"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -135,22 +120,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-
+                android:textColor="#666"
                 android:paddingBottom="16dp"
                 android:layout_marginBottom="16dp"
                 android:textSize="18sp" />
             <TextView
-                android:text="Ulangi Password"
+                android:text="Konfirmasi Password"
+                android:textColor="#666"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/re_password"
+                android:textColor="#666"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-
                 android:paddingBottom="16dp"
                 android:layout_marginBottom="32dp"
                 android:textSize="18sp" />

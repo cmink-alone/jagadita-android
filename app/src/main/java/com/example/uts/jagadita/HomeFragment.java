@@ -39,10 +39,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle("Jagadita");
-
         card_rekomendasi = view.findViewById(R.id.card_rekomendasi);
         card_list = view.findViewById(R.id.card_list);
         card_daftar = view.findViewById(R.id.card_daftar);

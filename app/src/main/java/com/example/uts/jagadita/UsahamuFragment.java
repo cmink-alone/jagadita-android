@@ -77,9 +77,6 @@ public class UsahamuFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle("Usaha Milikmu");
-
         list_usaha = view.findViewById(R.id.list_usaha);
 
         frame_list = view.findViewById(R.id.frame_list);

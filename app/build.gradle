@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
 
+    flavorDimensions "mode"
     defaultConfig {
         applicationId "com.example.uts.jagadita"
         minSdkVersion 19
@@ -11,6 +12,14 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    productFlavors {
+        sandbox {
+            dimension = "mode"
+            buildConfigField "String", "MERCHANT_BASE_URL", "\"https://jagadita.herokuapp.com/charge/index.php/\""
+            buildConfigField "String", "MERCHANT_CLIENT_KEY", "\"SB-Mid-client-pm__L0rkBSU6lVhY\""
+        }
     }
 
     buildTypes {
@@ -32,10 +41,14 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.4"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
 
+    implementation 'com.midtrans:uikit:1.25.0-SANDBOX'
+    sandboxImplementation 'com.midtrans:uikit:1.25.0-SANDBOX'
+
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 
 }

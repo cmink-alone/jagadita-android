@@ -3,6 +3,7 @@ package com.example.uts.jagadita.api;
 import com.example.uts.jagadita.models.ApiResponse;
 import com.example.uts.jagadita.models.Pengguna;
 import com.example.uts.jagadita.models.Perusahaan;
+import com.example.uts.jagadita.models.Transaksi;
 
 import java.util.List;
 
@@ -33,4 +34,15 @@ public interface ApiService {
 
     @POST("get_usaha_all.php")
     Observable<List<Perusahaan>> get_usaha_all();
+
+    @POST("get_transaksi.php")
+    @FormUrlEncoded
+    Observable<List<Transaksi>> get_transaksi(@Field("id_perusahaan") int id_perusahaan);
+
+    @POST("create_transaksi.php")
+    Call<ApiResponse> create_transaksi(@Body Transaksi transaksi);
+
+    @POST("get_transaksi_user.php")
+    @FormUrlEncoded
+    Observable<List<Transaksi>> get_transaksi_user(@Field("id_pengguna") int id_pengguna);
 }

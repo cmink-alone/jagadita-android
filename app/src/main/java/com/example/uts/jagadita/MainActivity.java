@@ -13,7 +13,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
-    Button btnLogout;
 
     PreferencesHelper preferencesHelper;
 
@@ -25,22 +24,13 @@ public class MainActivity extends AppCompatActivity {
         preferencesHelper = new PreferencesHelper(this);
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
-        btnLogout = findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                preferencesHelper.logout();
-                Intent login = new Intent(MainActivity.this, LoginActivity.class);
-                MainActivity.this.startActivity(login);
-                finish();
-            }
-        });
 
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.nav_beranda:
+                        getSupportActionBar().setTitle("Jagadita");
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.main_container, new HomeFragment(), HomeFragment.class.getSimpleName())
@@ -48,12 +38,21 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.nav_usaha:
+                        getSupportActionBar().setTitle("Usaha Milikmu");
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.main_container, new UsahamuFragment(MainActivity.this), UsahamuFragment.class.getSimpleName())
                                 .commit();
                         break;
+                    case R.id.nav_transaksi:
+                        getSupportActionBar().setTitle("Transaksi Pembelian");
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_container, new TransaksimuFragment(), UsahamuFragment.class.getSimpleName())
+                                .commit();
+                        break;
                     case R.id.nav_profil:
+                        getSupportActionBar().setTitle("Profil Pengguna");
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.main_container, new ProfilFragment(), ProfilFragment.class.getSimpleName())

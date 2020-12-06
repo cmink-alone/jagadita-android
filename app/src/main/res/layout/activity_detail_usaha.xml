@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_height="match_parent"
+    tools:context=".DetailUsahaActivity">
+
+    <ImageView
+        android:id="@+id/ic_store"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_outline_store_mall_directory_24"
+        android:tint="@color/colorPrimary"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <TextView
+        android:id="@+id/nama_perusahaan"
+        android:layout_gravity="center"
+        tools:text="Usaha Jual Cupang"
+        android:textSize="22sp"
+        android:textColor="#444"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ic_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/jenis_usaha"
+        android:layout_gravity="center"
+        tools:text="Perikanan"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nama_perusahaan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/total_saham"
+        android:layout_gravity="center"
+        tools:text="Total Rp100.000.000"
+        android:textColor="#666"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/jenis_usaha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/ic_pemilik"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/total_saham"
+        android:src="@drawable/ic_outline_account_box_24"
+        android:layout_width="30dp"
+        android:tint="@color/colorPrimaryDark"
+        android:layout_height="30dp"/>
+
+    <TextView
+        android:id="@+id/nama_pemilik"
+        android:layout_gravity="center"
+        tools:text="Trio Putra"
+        android:textColor="#666"
+        android:layout_marginLeft="16dp"
+        android:layout_marginVertical="4dp"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@id/ic_pemilik"
+        app:layout_constraintTop_toTopOf="@id/ic_pemilik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/ic_telp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/ic_pemilik"
+        app:layout_constraintTop_toBottomOf="@id/ic_pemilik"
+        android:src="@drawable/ic_outline_local_phone_24"
+        android:layout_width="30dp"
+        android:tint="@color/colorPrimaryDark"
+        android:layout_height="30dp"/>
+
+    <TextView
+        android:id="@+id/telp"
+        android:layout_gravity="center"
+        tools:text="0361232423123"
+        android:layout_marginVertical="4dp"
+        android:textColor="#666"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/nama_pemilik"
+        app:layout_constraintTop_toTopOf="@id/ic_telp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/ic_alamat"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/ic_telp"
+        app:layout_constraintTop_toBottomOf="@id/ic_telp"
+        android:src="@drawable/ic_outline_location_on_24"
+        android:layout_width="30dp"
+        android:tint="@color/colorPrimaryDark"
+        android:layout_height="30dp"/>
+
+    <TextView
+        android:id="@+id/alamat"
+        android:layout_gravity="center"
+        android:textColor="#666"
+        tools:text="Jalan Cokroaminoto No 124\nDenpasar"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/nama_pemilik"
+        app:layout_constraintTop_toTopOf="@id/ic_alamat"
+        android:layout_width="0dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/ic_harga"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/ic_alamat"
+        app:layout_constraintTop_toBottomOf="@id/ic_alamat"
+        android:src="@drawable/ic_outline_monetization_on_24"
+        android:layout_width="30dp"
+        android:tint="@color/colorPrimaryDark"
+        android:layout_height="30dp"/>
+
+    <TextView
+        android:id="@+id/harga"
+        android:layout_gravity="center"
+        tools:text="Rp100.000"
+        android:textColor="#666"
+        android:layout_marginVertical="4dp"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/nama_pemilik"
+        app:layout_constraintTop_toTopOf="@id/ic_harga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/ic_deskripsi"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/ic_harga"
+        app:layout_constraintTop_toBottomOf="@id/ic_harga"
+        android:src="@drawable/ic_outline_description_24"
+        android:layout_width="30dp"
+        android:tint="@color/colorPrimaryDark"
+        android:layout_height="30dp"/>
+
+    <TextView
+        android:id="@+id/deskripsi"
+        android:layout_gravity="center"
+        tools:text="Usaha yg menjual dan membeli motor dengan harga yang bersaing"
+        android:textSize="16sp"
+        android:textColor="#666"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/nama_pemilik"
+        app:layout_constraintTop_toTopOf="@id/ic_deskripsi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnBeli"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toBottomOf="@id/deskripsi"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="32dp"
+        android:text="BELI SAHAM"
+        android:layout_height="0dp"/>
+
+    <Button
+        android:id="@+id/btnDonatur"
+        android:textColor="#222"
+        android:background="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/btnBeli"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:text="DONATUR"
+        android:layout_height="0dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

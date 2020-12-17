@@ -1,5 +1,6 @@
 package com.example.uts.jagadita.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uts.jagadita.DetailUsahaActivity;
+import com.example.uts.jagadita.ListUsahaActivity;
 import com.example.uts.jagadita.R;
 import com.example.uts.jagadita.models.Perusahaan;
 import com.google.gson.Gson;
@@ -21,7 +23,6 @@ import java.util.List;
 public class PerusahaanAdapter extends RecyclerView.Adapter<PerusahaanAdapter.ViewHolder> {
     Context context;
     List<Perusahaan> perusahaans;
-
 
     public PerusahaanAdapter(Context context, List<Perusahaan> perusahaans) {
         this.context = context;
@@ -82,7 +83,9 @@ public class PerusahaanAdapter extends RecyclerView.Adapter<PerusahaanAdapter.Vi
 
             Intent detail_activity = new Intent(view.getContext(), DetailUsahaActivity.class);
             detail_activity.putExtra(DetailUsahaActivity.EXTRA_SESSION_ID, new Gson().toJson(perusahaan));
-            view.getContext().startActivity(detail_activity);
+            detail_activity.putExtra("position", position);
+            Activity activity = (Activity) context;
+            activity.startActivityForResult(detail_activity,ListUsahaActivity.LAUNCH_DETAIL_USAHA);
         }
     }
 }

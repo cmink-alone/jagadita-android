@@ -48,7 +48,14 @@ public class MainActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle("Transaksi Pembelian");
                         getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.main_container, new TransaksimuFragment(), UsahamuFragment.class.getSimpleName())
+                                .replace(R.id.main_container, new TransaksimuFragment(), TransaksimuFragment.class.getSimpleName())
+                                .commit();
+                        break;
+                    case R.id.nav_donasi:
+                        getSupportActionBar().setTitle("Donasi");
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_container, new DonasimuFragment(), DonasimuFragment.class.getSimpleName())
                                 .commit();
                         break;
                     case R.id.nav_profil:

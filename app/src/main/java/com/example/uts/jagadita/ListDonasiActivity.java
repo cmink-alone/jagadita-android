@@ -4,19 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.uts.jagadita.adapter.PerusahaanAdapter;
+import com.example.uts.jagadita.adapter.DonasiAdapter;
 import com.example.uts.jagadita.api.ApiClient;
 import com.example.uts.jagadita.api.ApiService;
+import com.example.uts.jagadita.models.Donasi;
 import com.example.uts.jagadita.models.Perusahaan;
-import com.example.uts.jagadita.utils.PreferencesHelper;
+import com.example.uts.jagadita.models.Donasi;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -28,56 +28,72 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class ListUsahaActivity extends AppCompatActivity {
-    public static final int LAUNCH_DETAIL_USAHA = 1;
-    RecyclerView list_usaha;
-    ProgressBar progress_bar;
+public class ListDonasiActivity extends AppCompatActivity {
+    public static final String EXTRA_SESSION_ID = "DATA_DONASI";
 
-    public PerusahaanAdapter adapter;
-    public List<Perusahaan> perusahaanList = new ArrayList<>();	;
+    RecyclerView list_donasi;
+    LinearLayout frame_list;
+    LinearLayout frame_empty;
+    ProgressBar progress_bar;
 
     ApiService apiService;
 
+    public DonasiAdapter adapter;
+    public List<Donasi> donasiList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_usaha);
+        setContentView(R.layout.activity_list_donasi);
 
-        getSupportActionBar().setTitle("Perusahaan");
+        getSupportActionBar().setTitle("Data Donasi");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         apiService = ApiClient.getService(this);
 
-        list_usaha = findViewById(R.id.list_usaha);
+        String perusahaanJson = getIntent().getStringExtra(EXTRA_SESSION_ID);
+        Perusahaan perusahaan = new Gson().fromJson(perusahaanJson, Perusahaan.class);
+
+        list_donasi = findViewById(R.id.list_donasi);
+        frame_list = findViewById(R.id.frame_list);
+        frame_empty = findViewById(R.id.frame_empty);
         progress_bar = findViewById(R.id.progress_bar);
 
-        adapter = new PerusahaanAdapter(this, perusahaanList);
-        list_usaha.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        list_usaha.setAdapter(adapter);
+        frame_list.setVisibility(View.GONE);
+        frame_empty.setVisibility(View.GONE);
+        progress_bar.setVisibility(View.VISIBLE);
 
-        Observable<List<Perusahaan>> getUsaha = apiService.get_usaha_all()
+        adapter = new DonasiAdapter(this, donasiList);
+        list_donasi.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        list_donasi.setAdapter(adapter);
+
+        Observable<List<Donasi>> getDonasi = apiService.get_donasi(perusahaan.getId())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
-        getUsaha.subscribe(
-                new Observer<List<Perusahaan>>() {
+        getDonasi.subscribe(
+                new Observer<List<Donasi>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
 
                     @Override
-                    public void onNext(List<Perusahaan> perusahaans) {
+                    public void onNext(List<Donasi> listTrs) {
                         progress_bar.setVisibility(View.GONE);
-                        if(perusahaans.size()>0){
-                            perusahaanList = perusahaans;
-                            adapter.setItems(perusahaans);
+                        if(listTrs.size()>0){
+                            donasiList = listTrs;
+                            adapter.setItems(donasiList);
                             adapter.notifyDataSetChanged();
+                            frame_list.setVisibility(View.VISIBLE);
+                            frame_empty.setVisibility(View.GONE);
+                        } else {
+                            frame_list.setVisibility(View.GONE);
+                            frame_empty.setVisibility(View.VISIBLE);
                         }
 //                        Toast.makeText(getActivity(), "SUKSES MENDAPAT DATA", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(ListUsahaActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListDonasiActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -89,28 +105,12 @@ public class ListUsahaActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == LAUNCH_DETAIL_USAHA) {
-            if(resultCode == Activity.RESULT_OK){
-                int total_saham=data.getIntExtra("total_saham", 0);
-                int position=data.getIntExtra("position", 0);
-                perusahaanList.get(position).setTotal_saham(total_saham);
-                adapter.setItems(perusahaanList);
-                adapter.notifyDataSetChanged();
-                Toast.makeText(this, "MASUK" , Toast.LENGTH_LONG).show();
-            }
         }
     }
 }

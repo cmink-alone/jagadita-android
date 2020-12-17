@@ -2,6 +2,7 @@ package com.example.uts.jagadita;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.example.uts.jagadita.api.ApiClient;
 import com.example.uts.jagadita.api.ApiService;
 import com.example.uts.jagadita.models.ApiResponse;
+import com.example.uts.jagadita.models.Donasi;
 import com.example.uts.jagadita.models.Perusahaan;
 import com.example.uts.jagadita.models.Transaksi;
 import com.example.uts.jagadita.utils.PreferencesHelper;
@@ -25,7 +27,6 @@ import com.midtrans.sdk.corekit.core.themes.CustomColorTheme;
 import com.midtrans.sdk.corekit.models.ItemDetails;
 import com.midtrans.sdk.corekit.models.snap.Authentication;
 import com.midtrans.sdk.corekit.models.snap.CreditCard;
-import com.midtrans.sdk.corekit.models.snap.CustomerDetails;
 import com.midtrans.sdk.corekit.models.snap.TransactionResult;
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder;
 
@@ -36,6 +37,9 @@ import retrofit2.Response;
 
 
 public class DetailUsahaActivity extends AppCompatActivity implements TransactionFinishedCallback {
+    public boolean statusTransaksi = true;
+    int gross_amount;
+    int position;
     public boolean statusPembeli = true;
     public static final String EXTRA_SESSION_ID = "DATA_PERUSAHAAN";
 
@@ -68,6 +72,7 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //get perusahaan data
         String perusahaanJson = getIntent().getStringExtra(EXTRA_SESSION_ID);
+        position = getIntent().getIntExtra("position", 0);
         perusahaan = new Gson().fromJson(perusahaanJson, Perusahaan.class);
 
         statusPembeli = !(preferencesHelper.getUserId() == perusahaan.getId_pemilik());
@@ -102,11 +107,26 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
             @Override
             public void onClick(View view) {
                 if(statusPembeli){
+                    statusTransaksi = true;
                     clickPay(perusahaan);
                 } else {
                     Intent transaksi_list = new Intent(view.getContext(), ListTransaksiActivity.class);
                     transaksi_list.putExtra(ListTransaksiActivity.EXTRA_SESSION_ID, new Gson().toJson(perusahaan));
                     view.getContext().startActivity(transaksi_list);
+                }
+            }
+        });
+
+        btnDonatur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(statusPembeli){
+                    statusTransaksi = false;
+                    clickPay(perusahaan);
+                } else {
+                    Intent donasi_list = new Intent(view.getContext(), ListDonasiActivity.class);
+                    donasi_list.putExtra(ListDonasiActivity.EXTRA_SESSION_ID, new Gson().toJson(perusahaan));
+                    view.getContext().startActivity(donasi_list);
                 }
             }
         });
@@ -162,11 +182,20 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
     @Override
     public void onTransactionFinished(TransactionResult result) {
         String status = "";
+        gross_amount = 0;
         if(result.getResponse() != null){
             switch (result.getStatus()){
                 case TransactionResult.STATUS_SUCCESS:
                     Toast.makeText(this, "Transaction Sukses " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
                     status = "berhasil";
+                    gross_amount = Integer.parseInt(result.getResponse().getGrossAmount().replace(".00",""));
+                    total_saham.setText("Rp"+String.valueOf(perusahaan.getTotal_saham()+gross_amount));
+
+                    //send back the gross amount to list usaha
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("total_saham",perusahaan.getTotal_saham()+gross_amount);
+                    returnIntent.putExtra("position",position);
+                    setResult(Activity.RESULT_OK,returnIntent);
                     break;
                 case TransactionResult.STATUS_PENDING:
                     Toast.makeText(this, "Transaction Pending " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
@@ -191,18 +220,30 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
         }
 
         String gross_amount = result.getResponse().getGrossAmount().replace(".00", "");
-        Transaksi transaksi = new Transaksi(
-                preferencesHelper.getUserId(),
-                perusahaan.getId(),
-                Integer.parseInt(gross_amount),
-                status,
-                result.getResponse().getTransactionId()
-        );
-        apiService.create_transaksi(transaksi)
-                .enqueue(new DetailUsahaActivity.CreateCallback());
+        if(statusTransaksi) {
+            Transaksi transaksi = new Transaksi(
+                    preferencesHelper.getUserId(),
+                    perusahaan.getId(),
+                    Integer.parseInt(gross_amount),
+                    status,
+                    result.getResponse().getTransactionId()
+            );
+            apiService.create_transaksi(transaksi)
+                    .enqueue(new CreateTransaksiCallback());
+        } else {
+            Donasi donasi = new Donasi(
+                    preferencesHelper.getUserId(),
+                    perusahaan.getId(),
+                    Integer.parseInt(gross_amount),
+                    status,
+                    result.getResponse().getTransactionId()
+            );
+            apiService.create_donasi(donasi)
+                    .enqueue(new CreateDonasiCallback());
+        }
     }
 
-    public class CreateCallback implements retrofit2.Callback<ApiResponse> {
+    public class CreateTransaksiCallback implements retrofit2.Callback<ApiResponse> {
         @Override
         public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
             ApiResponse apiResponse = response.body();
@@ -219,6 +260,26 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
         @Override
         public void onFailure(Call<ApiResponse> call, Throwable t) {
             Toast.makeText(DetailUsahaActivity.this, "Gagal menyimpan data transaksi", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public class CreateDonasiCallback implements retrofit2.Callback<ApiResponse> {
+        @Override
+        public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+            ApiResponse apiResponse = response.body();
+            if(response.isSuccessful() && apiResponse.getStatus()){
+
+                Toast.makeText(DetailUsahaActivity.this, "Berhasil menyimpan data donasi", Toast.LENGTH_LONG).show();
+
+                finish();
+            } else {
+                Toast.makeText(DetailUsahaActivity.this, "Gagal menyimpan data donasi", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<ApiResponse> call, Throwable t) {
+            Toast.makeText(DetailUsahaActivity.this, "Gagal menyimpan data donasi", Toast.LENGTH_LONG).show();
         }
     }
 }

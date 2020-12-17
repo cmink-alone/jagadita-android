@@ -15,45 +15,45 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uts.jagadita.R;
-import com.example.uts.jagadita.models.Transaksi;
+import com.example.uts.jagadita.models.Donasi;
 
 import java.util.List;
 
-public class TransaksiUserAdapter extends RecyclerView.Adapter<TransaksiUserAdapter.ViewHolder> {
+public class DonasiUserAdapter extends RecyclerView.Adapter<DonasiUserAdapter.ViewHolder> {
     Context context;
-    List<Transaksi> listTransaksi;
+    List<Donasi> listDonasi;
 
 
-    public TransaksiUserAdapter(Context context, List<Transaksi> listTransaksi) {
+    public DonasiUserAdapter(Context context, List<Donasi> listDonasi) {
         this.context = context;
-        this.listTransaksi = listTransaksi;
+        this.listDonasi = listDonasi;
     }
 
-    public void setItems(List<Transaksi> listTransaksi){
-        this.listTransaksi = listTransaksi;
+    public void setItems(List<Donasi> listDonasi){
+        this.listDonasi = listDonasi;
     }
 
     @NonNull
     @Override
-    public TransaksiUserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_transaksimu, parent, false);
+    public DonasiUserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_donasimu, parent, false);
         ViewHolder vh = new ViewHolder(view);
         return vh;
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull TransaksiUserAdapter.ViewHolder holder, int position) {
-        Transaksi transaksi = listTransaksi.get(position);
+    public void onBindViewHolder(@NonNull DonasiUserAdapter.ViewHolder holder, int position) {
+        Donasi donasi = listDonasi.get(position);
 
-        holder.nama_perusahaan.setText(transaksi.getNama_perusahaan());
-        holder.tanggal.setText(transaksi.getTanggal());
-        holder.total_beli.setText("Rp"+String.valueOf(transaksi.getTotal_beli()));
-        holder.status.setText(transaksi.getStatus());
+        holder.nama_perusahaan.setText(donasi.getNama_perusahaan());
+        holder.tanggal.setText(donasi.getTanggal());
+        holder.total_beli.setText("Rp"+String.valueOf(donasi.getTotal_beli()));
+        holder.status.setText(donasi.getStatus());
         int color = R.color.colorPrimary;
-        if(transaksi.getStatus().equals("pending") || transaksi.getStatus().equals("dibatalkan")) {
+        if(donasi.getStatus().equals("pending") || donasi.getStatus().equals("dibatalkan")) {
             color = R.color.colorAccent;
-        } else if(transaksi.getStatus().equals("gagal")){
+        } else if(donasi.getStatus().equals("gagal")){
             color = R.color.red;
         }
         holder.status.setTextColor(ContextCompat.getColor(context, color));
@@ -64,7 +64,7 @@ public class TransaksiUserAdapter extends RecyclerView.Adapter<TransaksiUserAdap
 
     @Override
     public int getItemCount() {
-        return listTransaksi.size();
+        return listDonasi.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

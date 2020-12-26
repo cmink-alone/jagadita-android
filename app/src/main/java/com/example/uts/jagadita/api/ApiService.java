@@ -36,6 +36,10 @@ public interface ApiService {
     @POST("get_usaha_all.php")
     Observable<List<Perusahaan>> get_usaha_all();
 
+    @POST("get_usaha_rekomendasi.php")
+    @FormUrlEncoded
+    Observable<List<Perusahaan>> get_usaha_rekomendasi(@Field("id_pemilik") int id_pemilik);
+
     @POST("get_transaksi.php")
     @FormUrlEncoded
     Observable<List<Transaksi>> get_transaksi(@Field("id_perusahaan") int id_perusahaan);

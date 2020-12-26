@@ -11,7 +11,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:usesCleartextTraffic">
-        <activity android:name=".ListDonasiActivity"
+        <activity android:name=".ListRekomendasiUsahaActivity"
+            android:theme="@style/AppTheme.WithActionBar" />
+        <activity
+            android:name=".ListDonasiActivity"
             android:theme="@style/AppTheme.WithActionBar" />
         <activity
             android:name=".ListTransaksiActivity"
@@ -42,8 +45,8 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.WithActionBar" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

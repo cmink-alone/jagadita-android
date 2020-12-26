@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
         card_rekomendasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ListUsahaActivity.class);
+                Intent intent = new Intent(getActivity(), ListRekomendasiUsahaActivity.class);
                 getActivity().startActivity(intent);
             }
         });

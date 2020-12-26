@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.main_container, new UsahamuFragment(MainActivity.this), UsahamuFragment.class.getSimpleName())
                                 .commit();
                         break;
-                    case R.id.nav_transaksi:
-                        getSupportActionBar().setTitle("Transaksi Pembelian");
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_container, new TransaksimuFragment(), TransaksimuFragment.class.getSimpleName())
-                                .commit();
-                        break;
+//                    case R.id.nav_transaksi:
+//                        getSupportActionBar().setTitle("Transaksi Pembelian");
+//                        getSupportFragmentManager()
+//                                .beginTransaction()
+//                                .replace(R.id.main_container, new TransaksimuFragment(), TransaksimuFragment.class.getSimpleName())
+//                                .commit();
+//                        break;
                     case R.id.nav_donasi:
                         getSupportActionBar().setTitle("Donasi");
                         getSupportFragmentManager()

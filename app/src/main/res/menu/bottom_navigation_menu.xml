@@ -13,11 +13,11 @@
         android:icon="@drawable/ic_outline_storefront_24"
         android:title="Usahamu"/>
 
-    <item
-        android:id="@+id/nav_transaksi"
-        android:enabled="true"
-        android:icon="@drawable/ic_outline_money_24"
-        android:title="Transaksi"/>
+<!--    <item-->
+<!--        android:id="@+id/nav_transaksi"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_outline_money_24"-->
+<!--        android:title="Transaksi"/>-->
 
     <item
         android:id="@+id/nav_donasi"

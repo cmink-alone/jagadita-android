@@ -165,6 +165,7 @@
         android:layout_height="wrap_content"/>
 
     <Button
+        android:visibility="gone"
         android:id="@+id/btnBeli"
         android:textColor="@color/white"
         android:background="@color/colorPrimaryDark"
@@ -175,16 +176,25 @@
         android:layout_marginTop="32dp"
         android:text="BELI SAHAM"
         android:layout_height="0dp"/>
-
+    <EditText
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtDonasi"
+        android:hint="Nominal Donasi"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/deskripsi"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btnDonatur"
-        android:textColor="#222"
-        android:background="@color/colorAccent"
-        app:layout_constraintTop_toBottomOf="@id/btnBeli"
+        android:textColor="#FFF"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toBottomOf="@id/txtDonasi"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="match_parent"
         android:layout_marginTop="16dp"
-        android:text="DONATUR"
+        android:text="KIRIM DONASI"
         android:layout_height="0dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,8 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
     TextView harga;
     TextView deskripsi;
 
+    EditText txtDonasi;
+
     Button btnBeli;
     Button btnDonatur;
 
@@ -87,6 +90,7 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
         deskripsi = findViewById(R.id.deskripsi);
         btnBeli = findViewById(R.id.btnBeli);
         btnDonatur = findViewById(R.id.btnDonatur);
+        txtDonasi = findViewById(R.id.txtDonasi);
 
         if(!statusPembeli){
             btnBeli.setText("Lihat Pembeli");
@@ -103,19 +107,19 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
         deskripsi.setText(perusahaan.getDeskripsi());
 
 
-        btnBeli.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(statusPembeli){
-                    statusTransaksi = true;
-                    clickPay(perusahaan);
-                } else {
-                    Intent transaksi_list = new Intent(view.getContext(), ListTransaksiActivity.class);
-                    transaksi_list.putExtra(ListTransaksiActivity.EXTRA_SESSION_ID, new Gson().toJson(perusahaan));
-                    view.getContext().startActivity(transaksi_list);
-                }
-            }
-        });
+//        btnBeli.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(statusPembeli){
+//                    statusTransaksi = true;
+//                    clickPay(perusahaan);
+//                } else {
+//                    Intent transaksi_list = new Intent(view.getContext(), ListTransaksiActivity.class);
+//                    transaksi_list.putExtra(ListTransaksiActivity.EXTRA_SESSION_ID, new Gson().toJson(perusahaan));
+//                    view.getContext().startActivity(transaksi_list);
+//                }
+//            }
+//        });
 
         btnDonatur.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +138,7 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
     }
 
     private void clickPay(Perusahaan perusahaan){
-        MidtransSDK.getInstance().setTransactionRequest(transactionRequest(String.valueOf(perusahaan.getId()),perusahaan.getHarga(), 1, "Saham" + perusahaan.getNama_perusahaan()));
+        MidtransSDK.getInstance().setTransactionRequest(transactionRequest(String.valueOf(perusahaan.getId()),Integer.parseInt(txtDonasi.getText().toString()), 1, "Saham" + perusahaan.getNama_perusahaan()));
         UIKitCustomSetting setting = MidtransSDK.getInstance().getUIKitCustomSetting();
         setting.setSkipCustomerDetailsPages(true);
         MidtransSDK.getInstance().setUIKitCustomSetting(setting);

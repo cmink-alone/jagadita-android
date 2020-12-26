@@ -95,6 +95,7 @@
                     android:text="LOGIN"
                     android:textStyle="bold"
                     android:textColor="#FFF" />
+
             </RelativeLayout>
 
             <LinearLayout

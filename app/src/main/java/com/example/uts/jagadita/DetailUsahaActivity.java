@@ -92,9 +92,11 @@ public class DetailUsahaActivity extends AppCompatActivity implements Transactio
         btnDonatur = findViewById(R.id.btnDonatur);
         txtDonasi = findViewById(R.id.txtDonasi);
 
+        txtDonasi.setVisibility(View.VISIBLE);
         if(!statusPembeli){
             btnBeli.setText("Lihat Pembeli");
             btnDonatur.setText("Lihat Donatur");
+            txtDonasi.setVisibility(View.GONE);
         }
 
         nama_perusahaan.setText(perusahaan.getNama_perusahaan());

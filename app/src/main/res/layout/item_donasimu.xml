@@ -74,6 +74,7 @@
             tools:text="Status"
             android:textAlignment="center"
             android:textSize="14sp"
+            android:background="@android:color/white"
             android:textColor="#666"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

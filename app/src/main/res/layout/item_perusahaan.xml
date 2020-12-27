@@ -93,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Denpasar"
+            android:background="@android:color/white"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textColor="#666"
@@ -106,6 +107,7 @@
             android:layout_height="16dp"
             android:src="@drawable/ic_outline_location_on_24"
             android:tint="#666"
+            android:background="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/kota"
             app:layout_constraintRight_toLeftOf="@id/kota" />
